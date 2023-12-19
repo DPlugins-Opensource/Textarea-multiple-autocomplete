@@ -102,16 +102,46 @@ document.addEventListener("DOMContentLoaded", () => {
         suggestionsEle.style.left = `${rect.left}px`;
 
         suggestionsEle.innerHTML = "";
-        matches.forEach((match) => {
-            const option = document.createElement("div");
-            option.innerText = match;
-            option.classList.add("container__suggestion");
-            option.addEventListener("click", function () {
-                replaceCurrentWord(textarea, this.innerText, prefixes);
-                suggestionsEle.style.display = "none";
+            matches.forEach((match) => {
+                const option = document.createElement("div");
+                option.classList.add("container__suggestion");
+
+                // Identify the part of the suggestion that matches the current word
+                const matchIndex = match
+                    .toLowerCase()
+                    .indexOf(currentWord.toLowerCase());
+                if (matchIndex >= 0) {
+                    // Part before the match
+                    const beforeMatch = match.substring(0, matchIndex);
+                    option.appendChild(document.createTextNode(beforeMatch));
+
+                    // Highlighted match
+                    const matchedText = match.substring(
+                        matchIndex,
+                        matchIndex + currentWord.length
+                    );
+                    const highlightSpan = document.createElement("span");
+                    highlightSpan.classList.add("highlight");
+                    highlightSpan.textContent = matchedText;
+                    option.appendChild(highlightSpan);
+
+                    // Part after the match
+                    const afterMatch = match.substring(
+                        matchIndex + currentWord.length
+                    );
+                    option.appendChild(document.createTextNode(afterMatch));
+                } else {
+                    // If no match found, display the suggestion as is
+                    option.textContent = match;
+                }
+
+                option.addEventListener("click", function () {
+                    replaceCurrentWord(textarea, match, prefixes);
+                    suggestionsEle.style.display = "none";
+                });
+
+                suggestionsEle.appendChild(option);
             });
-            suggestionsEle.appendChild(option);
-        });
         suggestionsEle.style.display = "block";
     });
 

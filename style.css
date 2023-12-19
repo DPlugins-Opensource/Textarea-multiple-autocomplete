@@ -3,9 +3,10 @@
 }
 
 .container__suggestions{
-    background-color: black;
-    color: white;
+    background-color: #f6f6f6;
+    color: #000000;
     max-width: 300px;
+    border: 1px solid #d7d7d7;
 }
 
 .container__suggestion--focused{
