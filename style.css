@@ -1,5 +1,5 @@
 .container__mirror{
-    display: none;
+    display: none !important;
 }
 
 .container__suggestions{

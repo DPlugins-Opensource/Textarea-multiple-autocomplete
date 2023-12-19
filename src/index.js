@@ -178,79 +178,78 @@ document.addEventListener("DOMContentLoaded", () => {
     const clamp = (min, value, max) => Math.min(Math.max(min, value), max);
 
     let currentSuggestionIndex = -1;
-textarea.addEventListener("keydown", (e) => {
-    if (
-        ![
-            "ArrowDown",
-            "ArrowUp",
-            "Enter",
-            "Escape",
-            "Tab",
-            "ArrowRight",
-        ].includes(e.key)
-    ) {
-        return;
-    }
+    textarea.addEventListener("keydown", (e) => {
+        if (
+            ![
+                "ArrowDown",
+                "ArrowUp",
+                "Enter",
+                "Escape",
+                "Tab",
+                "ArrowRight",
+            ].includes(e.key)
+        ) {
+            return;
+        }
 
-    const suggestions = suggestionsEle.querySelectorAll(
-        ".container__suggestion"
-    );
-    const numSuggestions = suggestions.length;
-    if (numSuggestions === 0 || suggestionsEle.style.display === "none") {
-        return;
-    }
-    e.preventDefault();
+        const suggestions = suggestionsEle.querySelectorAll(
+            ".container__suggestion"
+        );
+        const numSuggestions = suggestions.length;
+        if (numSuggestions === 0 || suggestionsEle.style.display === "none") {
+            return;
+        }
+        e.preventDefault();
 
-    switch (e.key) {
-        case "ArrowDown":
-            suggestions[
-                clamp(0, currentSuggestionIndex, numSuggestions - 1)
-            ].classList.remove("container__suggestion--focused");
-            currentSuggestionIndex = clamp(
-                0,
-                currentSuggestionIndex + 1,
-                numSuggestions - 1
-            );
-            suggestions[currentSuggestionIndex].classList.add(
-                "container__suggestion--focused"
-            );
-            break;
-        case "ArrowUp":
-            suggestions[
-                clamp(0, currentSuggestionIndex, numSuggestions - 1)
-            ].classList.remove("container__suggestion--focused");
-            currentSuggestionIndex = clamp(
-                0,
-                currentSuggestionIndex - 1,
-                numSuggestions - 1
-            );
-            suggestions[currentSuggestionIndex].classList.add(
-                "container__suggestion--focused"
-            );
-            break;
-        case "Enter":
-        case "Tab":
-        case "ArrowRight":
-            if (
-                currentSuggestionIndex >= 0 &&
-                currentSuggestionIndex < numSuggestions
-            ) {
-                replaceCurrentWord(
-                    suggestions[currentSuggestionIndex].innerText
+        switch (e.key) {
+            case "ArrowDown":
+                suggestions[
+                    clamp(0, currentSuggestionIndex, numSuggestions - 1)
+                ].classList.remove("container__suggestion--focused");
+                currentSuggestionIndex = clamp(
+                    0,
+                    currentSuggestionIndex + 1,
+                    numSuggestions - 1
                 );
-                suggestionsEle.style.display = "none";
-                // If Tab or ArrowRight was pressed, refocus the textarea to continue typing
-                if (e.key !== "Enter") {
-                    textarea.focus();
+                suggestions[currentSuggestionIndex].classList.add(
+                    "container__suggestion--focused"
+                );
+                break;
+            case "ArrowUp":
+                suggestions[
+                    clamp(0, currentSuggestionIndex, numSuggestions - 1)
+                ].classList.remove("container__suggestion--focused");
+                currentSuggestionIndex = clamp(
+                    0,
+                    currentSuggestionIndex - 1,
+                    numSuggestions - 1
+                );
+                suggestions[currentSuggestionIndex].classList.add(
+                    "container__suggestion--focused"
+                );
+                break;
+            case "Enter":
+            case "Tab":
+            case "ArrowRight":
+                if (
+                    currentSuggestionIndex >= 0 &&
+                    currentSuggestionIndex < numSuggestions
+                ) {
+                    replaceCurrentWord(
+                        suggestions[currentSuggestionIndex].innerText
+                    );
+                    suggestionsEle.style.display = "none";
+                    // If Tab or ArrowRight was pressed, refocus the textarea to continue typing
+                    if (e.key !== "Enter") {
+                        textarea.focus();
+                    }
                 }
-            }
-            break;
-        case "Escape":
-            suggestionsEle.style.display = "none";
-            break;
-        default:
-            break;
-    }
-});
-
+                break;
+            case "Escape":
+                suggestionsEle.style.display = "none";
+                break;
+            default:
+                break;
+        }
+    });
 });
