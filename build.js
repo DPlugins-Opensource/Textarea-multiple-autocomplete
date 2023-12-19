@@ -6,6 +6,7 @@ async function build() {
         await esbuild.build({
             entryPoints: ["src/main.js"],
             bundle: true,
+            // minify: true,
             outfile: "dist/main.min.js",
             plugins: [sassPlugin()],
         });
@@ -16,3 +17,4 @@ async function build() {
 }
 
 build();
+
