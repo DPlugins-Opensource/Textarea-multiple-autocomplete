@@ -11,3 +11,8 @@
 .container__suggestion--focused{
     background-color: blue;
 }
+
+.highlight {
+  font-weight: bold; /* Example: making the text bold */
+  color: red;       /* Example: changing the text color to red */
+}
