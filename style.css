@@ -1,0 +1,13 @@
+.container__mirror{
+    display: none;
+}
+
+.container__suggestions{
+    background-color: black;
+    color: white;
+    max-width: 300px;
+}
+
+.container__suggestion--focused{
+    background-color: blue;
+}
