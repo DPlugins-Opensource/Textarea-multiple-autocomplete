@@ -1,18 +1,6 @@
-// Add prefixes for which autocomplete should trigger
-const prefixes = [" ", "sm:", "md:"];
+import { prefixes } from "./prefixes";
+import { suggestions } from "./suggestions";
 
-const suggestions = [
-    "white",
-    "yellow",
-    "blue",
-    "red",
-    "green",
-    "black",
-    "brown",
-    "azure",
-    "ivory",
-    "teal",
-];
 
 document.addEventListener("DOMContentLoaded", () => {
     const containerEle = document.getElementById("container");
