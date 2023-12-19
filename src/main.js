@@ -1,12 +1,13 @@
+import "./style.scss"; // Import your SCSS file here
+
 import { prefixes } from "./prefixes";
 import { suggestions } from "./suggestions";
-import { 
-    parseValue, 
-    clamp, 
-    findIndexOfCurrentWord, 
-    replaceCurrentWord 
-} from './utilities.js';
-
+import {
+    parseValue,
+    clamp,
+    findIndexOfCurrentWord,
+    replaceCurrentWord,
+} from "./utilities.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const containerEle = document.getElementById("container");
@@ -46,7 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const ro = new ResizeObserver(() => {
         mirroredEle.style.width = `${textarea.clientWidth + 2 * borderWidth}px`;
-        mirroredEle.style.height = `${textarea.clientHeight + 2 * borderWidth}px`;
+        mirroredEle.style.height = `${
+            textarea.clientHeight + 2 * borderWidth
+        }px`;
     });
     ro.observe(textarea);
 
@@ -102,56 +105,67 @@ document.addEventListener("DOMContentLoaded", () => {
         suggestionsEle.style.left = `${rect.left}px`;
 
         suggestionsEle.innerHTML = "";
-            matches.forEach((match) => {
-                const option = document.createElement("div");
-                option.classList.add("container__suggestion");
+        matches.forEach((match) => {
+            const option = document.createElement("div");
+            option.classList.add("container__suggestion");
 
-                // Identify the part of the suggestion that matches the current word
-                const matchIndex = match
-                    .toLowerCase()
-                    .indexOf(currentWord.toLowerCase());
-                if (matchIndex >= 0) {
-                    // Part before the match
-                    const beforeMatch = match.substring(0, matchIndex);
-                    option.appendChild(document.createTextNode(beforeMatch));
+            // Identify the part of the suggestion that matches the current word
+            const matchIndex = match
+                .toLowerCase()
+                .indexOf(currentWord.toLowerCase());
+            if (matchIndex >= 0) {
+                // Part before the match
+                const beforeMatch = match.substring(0, matchIndex);
+                option.appendChild(document.createTextNode(beforeMatch));
 
-                    // Highlighted match
-                    const matchedText = match.substring(
-                        matchIndex,
-                        matchIndex + currentWord.length
-                    );
-                    const highlightSpan = document.createElement("span");
-                    highlightSpan.classList.add("highlight");
-                    highlightSpan.textContent = matchedText;
-                    option.appendChild(highlightSpan);
+                // Highlighted match
+                const matchedText = match.substring(
+                    matchIndex,
+                    matchIndex + currentWord.length
+                );
+                const highlightSpan = document.createElement("span");
+                highlightSpan.classList.add("highlight");
+                highlightSpan.textContent = matchedText;
+                option.appendChild(highlightSpan);
 
-                    // Part after the match
-                    const afterMatch = match.substring(
-                        matchIndex + currentWord.length
-                    );
-                    option.appendChild(document.createTextNode(afterMatch));
-                } else {
-                    // If no match found, display the suggestion as is
-                    option.textContent = match;
-                }
+                // Part after the match
+                const afterMatch = match.substring(
+                    matchIndex + currentWord.length
+                );
+                option.appendChild(document.createTextNode(afterMatch));
+            } else {
+                // If no match found, display the suggestion as is
+                option.textContent = match;
+            }
 
-                option.addEventListener("click", function () {
-                    replaceCurrentWord(textarea, match, prefixes);
-                    suggestionsEle.style.display = "none";
-                });
-
-                suggestionsEle.appendChild(option);
+            option.addEventListener("click", function () {
+                replaceCurrentWord(textarea, match, prefixes);
+                suggestionsEle.style.display = "none";
             });
+
+            suggestionsEle.appendChild(option);
+        });
         suggestionsEle.style.display = "block";
     });
 
     let currentSuggestionIndex = -1;
     textarea.addEventListener("keydown", (e) => {
-        if (!["ArrowDown", "ArrowUp", "Enter", "Escape", "Tab", "ArrowRight"].includes(e.key)) {
+        if (
+            ![
+                "ArrowDown",
+                "ArrowUp",
+                "Enter",
+                "Escape",
+                "Tab",
+                "ArrowRight",
+            ].includes(e.key)
+        ) {
             return;
         }
 
-        const suggestionsElements = suggestionsEle.querySelectorAll(".container__suggestion");
+        const suggestionsElements = suggestionsEle.querySelectorAll(
+            ".container__suggestion"
+        );
         const numSuggestions = suggestionsElements.length;
         if (numSuggestions === 0 || suggestionsEle.style.display === "none") {
             return;
@@ -160,20 +174,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
         switch (e.key) {
             case "ArrowDown":
-                suggestionsElements[clamp(0, currentSuggestionIndex, numSuggestions - 1)].classList.remove("container__suggestion--focused");
-                currentSuggestionIndex = clamp(0, currentSuggestionIndex + 1, numSuggestions - 1);
-                suggestionsElements[currentSuggestionIndex].classList.add("container__suggestion--focused");
+                suggestionsElements[
+                    clamp(0, currentSuggestionIndex, numSuggestions - 1)
+                ].classList.remove("container__suggestion--focused");
+                currentSuggestionIndex = clamp(
+                    0,
+                    currentSuggestionIndex + 1,
+                    numSuggestions - 1
+                );
+                suggestionsElements[currentSuggestionIndex].classList.add(
+                    "container__suggestion--focused"
+                );
                 break;
             case "ArrowUp":
-                suggestionsElements[clamp(0, currentSuggestionIndex, numSuggestions - 1)].classList.remove("container__suggestion--focused");
-                currentSuggestionIndex = clamp(0, currentSuggestionIndex - 1, numSuggestions - 1);
-                suggestionsElements[currentSuggestionIndex].classList.add("container__suggestion--focused");
+                suggestionsElements[
+                    clamp(0, currentSuggestionIndex, numSuggestions - 1)
+                ].classList.remove("container__suggestion--focused");
+                currentSuggestionIndex = clamp(
+                    0,
+                    currentSuggestionIndex - 1,
+                    numSuggestions - 1
+                );
+                suggestionsElements[currentSuggestionIndex].classList.add(
+                    "container__suggestion--focused"
+                );
                 break;
             case "Enter":
             case "Tab":
             case "ArrowRight":
-                if (currentSuggestionIndex >= 0 && currentSuggestionIndex < numSuggestions) {
-                    replaceCurrentWord(textarea, suggestionsElements[currentSuggestionIndex].innerText, prefixes);
+                if (
+                    currentSuggestionIndex >= 0 &&
+                    currentSuggestionIndex < numSuggestions
+                ) {
+                    replaceCurrentWord(
+                        textarea,
+                        suggestionsElements[currentSuggestionIndex].innerText,
+                        prefixes
+                    );
                     suggestionsEle.style.display = "none";
                     if (e.key !== "Enter") {
                         textarea.focus();
