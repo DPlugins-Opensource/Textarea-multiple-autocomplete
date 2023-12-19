@@ -11,12 +11,14 @@ Updated to get extra features:
 
 Update prefixes.js
 
-```export const prefixes = [" ", "sm:", "md:"];
+```js
+export const prefixes = [" ", "sm:", "md:"];
 ```
 
 # Change autocomplete aka suggestions
 
-```export const suggestions = [
+```js
+export const suggestions = [
     "white",
     "yellow",
     "blue",
