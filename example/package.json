@@ -1,0 +1,19 @@
+{
+  "name": "textarea-multiple-autocomplete",
+  "version": "1.0.0",
+  "description": "This is modified solution from this website: https://phuoc.ng/collection/mirror-a-text-area/add-autocomplete-to-your-text-area/",
+  "main": "index.js",
+  "scripts": {
+    "build-js": "node build.js",
+    "watch": "nodemon --watch src -e js,scss build.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "esbuild": "^0.19.10",
+    "esbuild-sass-plugin": "^2.16.1",
+    "nodemon": "^3.0.2",
+    "npm-run-all": "^4.1.5"
+  }
+}
