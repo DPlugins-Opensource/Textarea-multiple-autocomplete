@@ -4,7 +4,7 @@ const sassPlugin = require("esbuild-sass-plugin").sassPlugin;
 async function build() {
     try {
         await esbuild.build({
-            entryPoints: ["src/main.js"],
+            entryPoints: ["../main.js"],
             bundle: true,
             // minify: true,
             outfile: "dist/main.min.js",
