@@ -1,0 +1,25 @@
+{
+  "name": "DPlugins-Opensource/fuzzy-area",
+  "version": "1.0.0",
+  "description": "simple plain js textarea fuzzy autocomplete with option to defne prefix",
+  "main": "fuzzy-area.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DPlugins-Opensource/fuzzy-area"
+  },
+  "keywords": [
+    "plain",
+    "javascript",
+    "textarea",
+    "fuzzy",
+    "autocomplete"
+  ],
+  "author": "DPlugins",
+  "license": "ISC"
+}
