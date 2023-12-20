@@ -6,7 +6,7 @@
 2. To trigger autocomplete apply with Enter, Tab, Right Arrow "→"
 3. Fuzzy search
 
-# Change triggers
+## Change triggers
 
 Update prefixes.js
 
@@ -14,7 +14,7 @@ Update prefixes.js
 export const prefixes = [" ", "sm:", "md:"];
 ```
 
-# Change autocomplete aka suggestions
+## Change autocomplete aka suggestions
 
 ```js
 export const suggestions = [
@@ -31,12 +31,20 @@ export const suggestions = [
 ];
 ```
 
-# Preview
+## Basic markup
 
-## Regular on type
+```html
+<div class="container" id="container">
+    <textarea id="fuzzyarea" class="container__textarea"></textarea>
+</div>
+```
+
+## Preview
+
+### Regular on type
 <img width="416" alt="preview" src="https://github.com/dplugins-opensource/fuzzy-area/assets/1234350/b5c2ed0a-bf77-42da-bd34-64a467919643">
 
-## Regular on prefix
+### Regular on prefix
 <img width="487" alt="preview-prefix" src="https://github.com/dplugins-opensource/fuzzy-area/assets/1234350/667c7801-5902-4e79-b971-e229d6e7d5a5">
 
 

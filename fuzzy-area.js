@@ -16,15 +16,15 @@ document.addEventListener("DOMContentLoaded", () => {
         : suggestions;
 
     const containerEle = document.getElementById("container");
-    const textarea = document.getElementById("textarea");
+    const textarea = document.getElementById("fuzzyarea");
 
     const mirroredEle = document.createElement("div");
     mirroredEle.textContent = textarea.value;
-    mirroredEle.classList.add("container__mirror");
+    mirroredEle.classList.add("fuzzyarea__mirror");
     containerEle.prepend(mirroredEle);
 
     const suggestionsEle = document.createElement("div");
-    suggestionsEle.classList.add("container__suggestions");
+    suggestionsEle.classList.add("fuzzyarea__suggestions");
     containerEle.appendChild(suggestionsEle);
 
     const textareaStyles = window.getComputedStyle(textarea);
@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
         suggestionsEle.innerHTML = "";
         matches.forEach((match) => {
             const option = document.createElement("div");
-            option.classList.add("container__suggestion");
+            option.classList.add("fuzzyarea__suggestion");
 
             // Identify the part of the suggestion that matches the current word
             const matchIndex = match
@@ -126,15 +126,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 const beforeMatch = match.substring(0, matchIndex);
                 option.appendChild(document.createTextNode(beforeMatch));
 
-                // Highlighted match
+                // fuzzyarea__highlighted match
                 const matchedText = match.substring(
                     matchIndex,
                     matchIndex + currentWord.length
                 );
-                const highlightSpan = document.createElement("span");
-                highlightSpan.classList.add("highlight");
-                highlightSpan.textContent = matchedText;
-                option.appendChild(highlightSpan);
+                const fuzzyarea__highlightSpan = document.createElement("span");
+                fuzzyarea__highlightSpan.classList.add("fuzzyarea__highlight");
+                fuzzyarea__highlightSpan.textContent = matchedText;
+                option.appendChild(fuzzyarea__highlightSpan);
 
                 // Part after the match
                 const afterMatch = match.substring(
@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const suggestionsElements = suggestionsEle.querySelectorAll(
-            ".container__suggestion"
+            ".fuzzyarea__suggestion"
         );
         const numSuggestions = suggestionsElements.length;
         if (numSuggestions === 0 || suggestionsEle.style.display === "none") {
@@ -207,27 +207,27 @@ document.addEventListener("DOMContentLoaded", () => {
             case "ArrowDown":
                 suggestionsElements[
                     clamp(0, currentSuggestionIndex, numSuggestions - 1)
-                ].classList.remove("container__suggestion--focused");
+                ].classList.remove("fuzzyarea__suggestion--focused");
                 currentSuggestionIndex = clamp(
                     0,
                     currentSuggestionIndex + 1,
                     numSuggestions - 1
                 );
                 suggestionsElements[currentSuggestionIndex].classList.add(
-                    "container__suggestion--focused"
+                    "fuzzyarea__suggestion--focused"
                 );
                 break;
             case "ArrowUp":
                 suggestionsElements[
                     clamp(0, currentSuggestionIndex, numSuggestions - 1)
-                ].classList.remove("container__suggestion--focused");
+                ].classList.remove("fuzzyarea__suggestion--focused");
                 currentSuggestionIndex = clamp(
                     0,
                     currentSuggestionIndex - 1,
                     numSuggestions - 1
                 );
                 suggestionsElements[currentSuggestionIndex].classList.add(
-                    "container__suggestion--focused"
+                    "fuzzyarea__suggestion--focused"
                 );
                 break;
             case "Enter":
