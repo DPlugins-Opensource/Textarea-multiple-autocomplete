@@ -34,10 +34,10 @@ export const suggestions = [
 # Preview
 
 ## Regular on type
-![alt text](preview.png "Preview")
+![alt text](./assets/preview.png "Preview")
 
 ## Regular on prefix
-![alt text](preview-prefix.png "Preview")
+![alt text](./assets/preview-prefix.png "Preview Prefix")
 
 
 ### Credits:
