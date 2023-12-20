@@ -4,6 +4,7 @@
 
 1. Autocomplete prefix
 2. To trigger autocomplete apply with Enter, Tab, Right Arrow "→"
+3. Fuzzy search
 
 # Change triggers
 
