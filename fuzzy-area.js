@@ -10,10 +10,11 @@ import {
 } from "./utilities.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  
     const _prefixes = window?.prefixes?.length ? window.prefixes : prefixes;
-    const _suggestions = window?.suggestions?.length ? window.suggestions : suggestions;
-  
+    const _suggestions = window?.suggestions?.length
+        ? window.suggestions
+        : suggestions;
+
     const containerEle = document.getElementById("container");
     const textarea = document.getElementById("textarea");
 
@@ -78,13 +79,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 prefixMatched = true;
             }
         });
-        
+
         let matches = [];
         if (prefixMatched) {
             matches = _suggestions;
         } else {
             matches = _suggestions.filter(
-                (suggestion) => suggestion.toLowerCase().indexOf(currentWord.toLowerCase()) > -1
+                (suggestion) =>
+                    suggestion
+                        .toLowerCase()
+                        .indexOf(currentWord.toLowerCase()) > -1
             );
         }
 
@@ -176,7 +180,30 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         e.preventDefault();
 
+        // Check if Ctrl key is pressed
+        const ctrlKeyPressed = e.ctrlKey;
+
         switch (e.key) {
+            case "ArrowRight":
+                if (!ctrlKeyPressed) {
+                    // Perform autocomplete only if Ctrl key is not pressed
+                    if (
+                        currentSuggestionIndex >= 0 &&
+                        currentSuggestionIndex < numSuggestions
+                    ) {
+                        replaceCurrentWord(
+                            textarea,
+                            suggestionsElements[currentSuggestionIndex]
+                                .innerText,
+                            _prefixes
+                        );
+                        suggestionsEle.style.display = "none";
+                        if (e.key !== "Enter") {
+                            textarea.focus();
+                        }
+                    }
+                }
+                break;
             case "ArrowDown":
                 suggestionsElements[
                     clamp(0, currentSuggestionIndex, numSuggestions - 1)
@@ -205,7 +232,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 break;
             case "Enter":
             case "Tab":
-            case "ArrowRight":
                 if (
                     currentSuggestionIndex >= 0 &&
                     currentSuggestionIndex < numSuggestions

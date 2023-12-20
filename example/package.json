@@ -4,7 +4,7 @@
   "description": "This is modified solution from this website: https://phuoc.ng/collection/mirror-a-text-area/add-autocomplete-to-your-text-area/",
   "main": "index.js",
   "scripts": {
-    "build-js": "node build.js",
+    "build": "node build.js",
     "watch": "nodemon --watch src -e js,scss build.js"
   },
   "keywords": [],
