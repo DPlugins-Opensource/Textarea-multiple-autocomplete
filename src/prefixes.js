@@ -1,1 +1,1 @@
-export const prefixes = [" ", "sm:", "md:"];
+export var prefixes = [" ", "sm:", "md:"];

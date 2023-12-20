@@ -1,4 +1,4 @@
-export const suggestions = [
+export var suggestions = [
     "white",
     "yellow",
     "blue",
