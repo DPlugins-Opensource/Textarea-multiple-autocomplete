@@ -1,7 +1,7 @@
 import "./style.scss"; // Import your SCSS file here
 
-import { prefixes } from "./prefixes";
-import { suggestions } from "./suggestions";
+import { getPrefixes } from "./prefixes";
+import { getSuggestions } from "./suggestions";
 import {
     parseValue,
     clamp,
@@ -9,7 +9,16 @@ import {
     replaceCurrentWord,
 } from "./utilities.js";
 
-document.addEventListener("DOMContentLoaded", () => {
+var __prefixes = [];
+var __suggestions = [];
+
+document.addEventListener("DOMContentLoaded", async () => {
+    __prefixes = await getPrefixes();
+    __suggestions = await getSuggestions();
+    
+    console.log(__prefixes);
+    console.log(__suggestions);
+  
     const containerEle = document.getElementById("container");
     const textarea = document.getElementById("textarea");
 
@@ -69,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         let prefixMatched = false;
-        prefixes.forEach((prefix) => {
+        __prefixes.forEach((prefix) => {
             if (currentWord.startsWith(prefix)) {
                 prefixMatched = true;
             }
@@ -77,9 +86,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let matches = [];
         if (prefixMatched) {
-            matches = suggestions;
+            matches = __suggestions;
         } else {
-            matches = suggestions.filter(
+            matches = __suggestions.filter(
                 (suggestion) => suggestion.indexOf(currentWord) > -1
             );
         }
@@ -139,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             option.addEventListener("click", function () {
-                replaceCurrentWord(textarea, match, prefixes);
+                replaceCurrentWord(textarea, match, __prefixes);
                 suggestionsEle.style.display = "none";
             });
 
@@ -209,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     replaceCurrentWord(
                         textarea,
                         suggestionsElements[currentSuggestionIndex].innerText,
-                        prefixes
+                        __prefixes
                     );
                     suggestionsEle.style.display = "none";
                     if (e.key !== "Enter") {
