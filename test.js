@@ -20,3 +20,9 @@ var suggestions = [
     "Dubai",
     "Beijing",
 ];
+
+window.suggestions = suggestions;
+
+var prefixes = [" ", "sm:", "md:", "lg:", "xl:", "xxl:"];
+
+window.prefixes = prefixes;

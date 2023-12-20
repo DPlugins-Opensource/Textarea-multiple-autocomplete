@@ -1,7 +1,7 @@
 import "./style.scss"; // Import your SCSS file here
 
-import { getPrefixes } from "./prefixes";
-import { getSuggestions } from "./suggestions";
+import { prefixes } from "./prefixes";
+import { suggestions } from "./suggestions";
 import {
     parseValue,
     clamp,
@@ -9,15 +9,10 @@ import {
     replaceCurrentWord,
 } from "./utilities.js";
 
-var __prefixes = [];
-var __suggestions = [];
-
-document.addEventListener("DOMContentLoaded", async () => {
-    __prefixes = await getPrefixes();
-    __suggestions = await getSuggestions();
-    
-    console.log(__prefixes);
-    console.log(__suggestions);
+document.addEventListener("DOMContentLoaded", () => {
+  
+    const _prefixes = window?.prefixes?.length ? window.prefixes : prefixes;
+    const _suggestions = window?.suggestions?.length ? window.suggestions : suggestions;
   
     const containerEle = document.getElementById("container");
     const textarea = document.getElementById("textarea");
@@ -78,18 +73,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         let prefixMatched = false;
-        __prefixes.forEach((prefix) => {
-            if (currentWord.startsWith(prefix)) {
+        _prefixes.forEach((prefix) => {
+            if (currentWord.toLowerCase().startsWith(prefix.toLowerCase())) {
                 prefixMatched = true;
             }
         });
-
+        
         let matches = [];
         if (prefixMatched) {
-            matches = __suggestions;
+            matches = _suggestions;
         } else {
-            matches = __suggestions.filter(
-                (suggestion) => suggestion.indexOf(currentWord) > -1
+            matches = _suggestions.filter(
+                (suggestion) => suggestion.toLowerCase().indexOf(currentWord.toLowerCase()) > -1
             );
         }
 
@@ -148,7 +143,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
 
             option.addEventListener("click", function () {
-                replaceCurrentWord(textarea, match, __prefixes);
+                replaceCurrentWord(textarea, match, _prefixes);
                 suggestionsEle.style.display = "none";
             });
 
@@ -218,7 +213,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     replaceCurrentWord(
                         textarea,
                         suggestionsElements[currentSuggestionIndex].innerText,
-                        __prefixes
+                        _prefixes
                     );
                     suggestionsEle.style.display = "none";
                     if (e.key !== "Enter") {
