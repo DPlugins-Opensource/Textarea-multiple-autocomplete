@@ -44,8 +44,11 @@ export const suggestions = [
 
 import { initializeFuzzyArea } from './fuzzy-area.js';
 
-// Call the function to initialize the fuzzy area
+// Initialize with default ID (#fuzzyarea)
 initializeFuzzyArea();
+
+// OR, to initialize with a custom ID
+initializeFuzzyArea({ containerId: 'myCustomContainerId' });
 ```
 
 ## Preview

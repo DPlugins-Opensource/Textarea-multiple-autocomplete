@@ -1,6 +1,6 @@
 {
   "name": "fuzzy-area",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "simple plain js textarea fuzzy autocomplete with option to defne prefix",
   "main": "fuzzy-area.js",
   "directories": {

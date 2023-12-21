@@ -16,9 +16,14 @@ export function initializeFuzzyArea() {
             ? window.suggestions
             : suggestions;
 
-        const containerEle = document.getElementById("container");
-        const textarea = document.getElementById("fuzzyarea");
-
+        // Use the provided ID from the config, or default to "fuzzyarea" if not provided
+        const containerId = config.containerId || "fuzzyarea";
+        const containerEle = document.getElementById(containerId);
+        if (!containerEle) {
+            console.error(`Element with ID '${containerId}' not found.`);
+            return;
+        }
+        
         const mirroredEle = document.createElement("div");
         mirroredEle.textContent = textarea.value;
         mirroredEle.classList.add("fuzzyarea__mirror");
