@@ -39,6 +39,15 @@ export const suggestions = [
 </div>
 ```
 
+```js
+// index.js
+
+import { initializeFuzzyArea } from './fuzzy-area.js';
+
+// Call the function to initialize the fuzzy area
+initializeFuzzyArea();
+```
+
 ## Preview
 
 ### Regular on type
