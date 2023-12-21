@@ -25,21 +25,21 @@
 
 .fuzzyarea__suggestion {
   padding: 0.3rem;
+}
 
-  &:hover {
-    background-color: rgba(58, 90, 233, 0.1);
-  }
+.fuzzyarea__suggestion:hover {
+  background-color: rgba(58, 90, 233, 0.1);
+}
 
-  &--focused {
-    color: white;
-    background-color: #3858e9;
+.fuzzyarea__suggestion--focused {
+  color: white;
+  background-color: #3858e9;
+}
 
-    .fuzzyarea__highlight {
-      color: #ff9d00;
-    }
+.fuzzyarea__suggestion--focused .fuzzyarea__highlight {
+  color: #ff9d00;
+}
 
-    &:hover {
-      background-color: #3858e9;
-    }
-  }
+.fuzzyarea__suggestion--focused:hover {
+  background-color: #3858e9;
 }
