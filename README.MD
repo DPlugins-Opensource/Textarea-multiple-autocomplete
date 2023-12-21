@@ -51,6 +51,13 @@ initializeFuzzyArea();
 initializeFuzzyArea({ containerId: 'myCustomContainerId' });
 ```
 
+## Props
+| Property         | Type     | Default      | Description                                                                                      |
+|------------------|----------|--------------|--------------------------------------------------------------------------------------------------|
+| `containerId`    | string   | 'fuzzyarea__container'  | ID of the container in which textarea exists, which is to be made autocomplete.       |
+| `textareaId`     | string   | null         | ID of the textarea, which is to be made autocomplete. If not provided then uses textarea in container. |
+| `waitForElement` | boolean  | false        | Should it wait for the element to exist in the DOM, useful for dynamically added textareas. |
+
 ## Preview
 
 ### Regular on type
@@ -62,4 +69,4 @@ initializeFuzzyArea({ containerId: 'myCustomContainerId' });
 
 ### Credits:
 This is modified solution from this website: 
-https://phuoc.ng/collection/mirror-a-text-area/add-autocomplete-to-your-text-area/
+[website](https://phuoc.ng/collection/mirror-a-text-area/add-autocomplete-to-your-text-area/)
