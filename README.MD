@@ -69,4 +69,4 @@ initializeFuzzyArea({ containerId: 'myCustomContainerId' });
 
 ### Credits:
 This is modified solution from this website: 
-[website](https://phuoc.ng/collection/mirror-a-text-area/add-autocomplete-to-your-text-area/)
+https://phuoc.ng/collection/mirror-a-text-area/add-autocomplete-to-your-text-area/
