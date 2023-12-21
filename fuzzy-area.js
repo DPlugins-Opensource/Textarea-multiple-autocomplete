@@ -8,6 +8,7 @@ import {
   findIndexOfCurrentWord,
   replaceCurrentWord,
 } from "./utilities.js";
+import { stylesContent } from "./styles.js";
 
 export function initializeFuzzyArea({
   containerId = "fuzzyarea__container",
@@ -19,6 +20,12 @@ export function initializeFuzzyArea({
     const _suggestions = window?.suggestions?.length
       ? window.suggestions
       : suggestions;
+
+    const styleElement = document.createElement('style');
+    styleElement.textContent = stylesContent;
+    document.head.appendChild(styleElement);
+
+    containerEle.style.position = "relative";
 
     const mirroredEle = document.createElement("div");
     mirroredEle.textContent = textarea.value;
