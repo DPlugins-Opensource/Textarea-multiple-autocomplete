@@ -126,10 +126,6 @@ export function initializeFuzzyArea({
       mirroredEle.innerHTML = "";
       mirroredEle.append(pre, caretEle, post);
 
-      // const rect = caretEle.getBoundingClientRect();
-      // suggestionsEle.style.top = `${rect.top + rect.height}px`;
-      // suggestionsEle.style.left = `${rect.left}px`;
-
       suggestionsEle.innerHTML = "";
       matches.forEach((match) => {
         const option = document.createElement("div");
