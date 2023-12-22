@@ -72,5 +72,5 @@ initializeFuzzyArea({ containerId: 'myCustomContainerId', maxSuggestions: 20 });
 
 
 ### Credits:
-This is modified solution from this website: 
-https://phuoc.ng/collection/mirror-a-text-area/add-autocomplete-to-your-text-area/
+This is modified solution from [phuoc.ng](https://phuoc.ng/collection/mirror-a-text-area/add-autocomplete-to-your-text-area/)
+
