@@ -1,3 +1,4 @@
+// main.js
 import "./style.scss"; // Import your SCSS file here
 
 import { prefixes } from "./prefixes";
@@ -36,7 +37,6 @@ export function initializeFuzzyArea({
         const suggestionsEle = document.createElement("div");
         suggestionsEle.classList.add("fuzzyarea__suggestions");
 
-        // Insert suggestionsEle just after the textarea
         textarea.insertAdjacentElement("afterend", suggestionsEle);
 
         const textareaStyles = window.getComputedStyle(textarea);
@@ -59,7 +59,6 @@ export function initializeFuzzyArea({
             mirroredEle.style[property] = textareaStyles[property];
         });
         mirroredEle.style.borderColor = "transparent";
-        // Hidden Mirror
         mirroredEle.style.display = "none";
 
         const borderWidth = parseValue(textareaStyles.borderWidth);
@@ -92,28 +91,15 @@ export function initializeFuzzyArea({
                 return;
             }
 
-            let prefixMatched = false;
-            _prefixes.forEach((prefix) => {
-                if (
-                    currentWord.toLowerCase().startsWith(prefix.toLowerCase())
-                ) {
-                    prefixMatched = true;
-                }
-            });
-
             let matches = [];
-            if (prefixMatched) {
-                matches = _suggestions;
+            if (currentWord.startsWith("@")) {
+                matches = _prefixes.map((prefix) => prefix);
             } else {
-                matches = _suggestions.filter(
-                    (suggestion) =>
-                        suggestion
-                            .toLowerCase()
-                            .indexOf(currentWord.toLowerCase()) > -1
+                matches = _suggestions.filter((suggestion) =>
+                    suggestion.toLowerCase().includes(currentWord.toLowerCase())
                 );
             }
 
-            // Limit the number of matches to the specified maximum number (Default is 10)
             matches = matches.slice(0, maxSuggestions);
 
             if (matches.length === 0) {
@@ -136,38 +122,7 @@ export function initializeFuzzyArea({
             matches.forEach((match) => {
                 const option = document.createElement("div");
                 option.classList.add("fuzzyarea__suggestion");
-
-                // Identify the part of the suggestion that matches the current word
-                const matchIndex = match
-                    .toLowerCase()
-                    .indexOf(currentWord.toLowerCase());
-                if (matchIndex >= 0) {
-                    // Part before the match
-                    const beforeMatch = match.substring(0, matchIndex);
-                    option.appendChild(document.createTextNode(beforeMatch));
-
-                    // fuzzyarea__highlighted match
-                    const matchedText = match.substring(
-                        matchIndex,
-                        matchIndex + currentWord.length
-                    );
-                    const fuzzyarea__highlightSpan =
-                        document.createElement("span");
-                    fuzzyarea__highlightSpan.classList.add(
-                        "fuzzyarea__highlight"
-                    );
-                    fuzzyarea__highlightSpan.textContent = matchedText;
-                    option.appendChild(fuzzyarea__highlightSpan);
-
-                    // Part after the match
-                    const afterMatch = match.substring(
-                        matchIndex + currentWord.length
-                    );
-                    option.appendChild(document.createTextNode(afterMatch));
-                } else {
-                    // If no match found, display the suggestion as is
-                    option.textContent = match;
-                }
+                option.textContent = match;
 
                 option.addEventListener("click", function () {
                     replaceCurrentWord(textarea, match, _prefixes);
@@ -182,13 +137,9 @@ export function initializeFuzzyArea({
         let currentSuggestionIndex = -1;
         textarea.addEventListener("keydown", (e) => {
             if (
-                ![
-                    "ArrowDown",
-                    "ArrowUp",
-                    "Enter",
-                    "Escape",
-                    "Tab",
-                ].includes(e.key)
+                !["ArrowDown", "ArrowUp", "Enter", "Escape", "Tab"].includes(
+                    e.key
+                )
             ) {
                 return;
             }
@@ -204,9 +155,6 @@ export function initializeFuzzyArea({
                 return;
             }
             e.preventDefault();
-
-            // Check if Ctrl key is pressed
-            const ctrlKeyPressed = e.ctrlKey;
 
             switch (e.key) {
                 case "ArrowDown":
@@ -270,10 +218,7 @@ export function initializeFuzzyArea({
     };
 
     const __init = () => {
-        // Use the provided ID from the config, or default to "fuzzyarea" if not provided
         const _containerSelector = `#${containerId || "fuzzyarea"}`;
-
-        // Use the provided ID from the config, or default to textarea in container if not provided
         const _textareaSelector = textareaId ? `#${textareaId}` : "textarea";
 
         if (waitForElement) {
@@ -299,7 +244,6 @@ export function initializeFuzzyArea({
         }
     };
 
-    // Check for DOM Readiness
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", __init);
     } else {

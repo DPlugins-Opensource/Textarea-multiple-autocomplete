@@ -14,13 +14,12 @@ export const findIndexOfCurrentWord = (textarea) => {
     return startIndex;
 };
 
-export const replaceCurrentWord = (textarea, newWord, prefixes) => {
+export const replaceCurrentWord = (textarea, newWord, prefixes = []) => {
     const currentValue = textarea.value;
     const cursorPos = textarea.selectionStart;
     let startIndex = findIndexOfCurrentWord(textarea);
     let endIndex = cursorPos;
 
-    // Find the end of the word
     while (
         endIndex < currentValue.length &&
         !/\s/.test(currentValue[endIndex])
@@ -28,7 +27,6 @@ export const replaceCurrentWord = (textarea, newWord, prefixes) => {
         endIndex++;
     }
 
-    // Check if the current word has a prefix
     let prefixFound = "";
     for (const prefix of prefixes) {
         if (
@@ -39,18 +37,27 @@ export const replaceCurrentWord = (textarea, newWord, prefixes) => {
         }
     }
 
-    // Replace the entire word while preserving the prefix
-    const newValue =
-        currentValue.substring(0, startIndex + 1) +
-        prefixFound +
-        newWord +
-        " " +
-        currentValue.substring(endIndex);
+    // Check if the newWord is a prefix and adjust accordingly
+    let newValue;
+    if (prefixes.includes(newWord)) {
+        newValue =
+            currentValue.substring(0, startIndex) +
+            newWord +
+            currentValue.substring(endIndex);
+    } else {
+        newValue =
+            currentValue.substring(0, startIndex + 1) +
+            prefixFound +
+            newWord +
+            " " +
+            currentValue.substring(endIndex);
+    }
     textarea.value = newValue;
 
-    // Set the cursor position right after the newly inserted word and space
-    const newCursorPos =
-        startIndex + 1 + prefixFound.length + newWord.length + 1;
+    let newCursorPos = startIndex + 1 + prefixFound.length + newWord.length;
+    if (!prefixes.includes(newWord)) {
+        newCursorPos += 1; // Adjust for the added space
+    }
     textarea.selectionStart = textarea.selectionEnd = newCursorPos;
     textarea.focus();
 };
