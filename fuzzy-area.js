@@ -188,7 +188,6 @@ export function initializeFuzzyArea({
                     "Enter",
                     "Escape",
                     "Tab",
-                    "ArrowRight",
                 ].includes(e.key)
             ) {
                 return;
@@ -210,26 +209,6 @@ export function initializeFuzzyArea({
             const ctrlKeyPressed = e.ctrlKey;
 
             switch (e.key) {
-                case "ArrowRight":
-                    if (!ctrlKeyPressed) {
-                        // Perform autocomplete only if Ctrl key is not pressed
-                        if (
-                            currentSuggestionIndex >= 0 &&
-                            currentSuggestionIndex < numSuggestions
-                        ) {
-                            replaceCurrentWord(
-                                textarea,
-                                suggestionsElements[currentSuggestionIndex]
-                                    .innerText,
-                                _prefixes
-                            );
-                            suggestionsEle.style.display = "none";
-                            if (e.key !== "Enter") {
-                                textarea.focus();
-                            }
-                        }
-                    }
-                    break;
                 case "ArrowDown":
                     suggestionsElements[
                         clamp(0, currentSuggestionIndex, numSuggestions - 1)
