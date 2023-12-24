@@ -74,3 +74,37 @@ initializeFuzzyArea({ containerId: 'myCustomContainerId', maxSuggestions: 20 });
 ### Credits:
 This is modified solution from [phuoc.ng](https://phuoc.ng/collection/mirror-a-text-area/add-autocomplete-to-your-text-area/)
 
+## Changelog
+
+1.0.15
+- Fixed keeping prefix after update suggestion
+
+1.0.14
+- Fixed suggestion replacment. It was deleting word only up till where the cursor is
+
+1.0.13
+- Updated readme
+
+1.0.12
+- Add option to change number max of suggestions
+
+1.0.11
+- added option to pass custom textarea id
+
+1.0.10 - 1.0.6
+- Refactor
+
+1.0.5
+- moved suggestions and prefix to the new files
+
+1.0.4 - 1.0.3
+- Refactor
+
+1.0.2
+- Clean up
+
+1.0.1
+- update to read global variables if declared
+
+1.0.1
+- release
