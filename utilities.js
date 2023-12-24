@@ -18,6 +18,15 @@ export const replaceCurrentWord = (textarea, newWord, prefixes) => {
     const currentValue = textarea.value;
     const cursorPos = textarea.selectionStart;
     const startIndex = findIndexOfCurrentWord(textarea);
+    let endIndex = cursorPos;
+
+    // Find the end of the word
+    while (
+        endIndex < currentValue.length &&
+        !/\s/.test(currentValue[endIndex])
+    ) {
+        endIndex++;
+    }
 
     let prefix = "";
     for (const pref of prefixes) {
@@ -31,13 +40,17 @@ export const replaceCurrentWord = (textarea, newWord, prefixes) => {
         }
     }
 
+    // Replace the entire word and add a space after the new word
     const newValue =
         currentValue.substring(0, startIndex + 1) +
         prefix +
         newWord +
-        currentValue.substring(cursorPos);
+        " " +
+        currentValue.substring(endIndex);
     textarea.value = newValue;
+
+    // Set the cursor position right after the newly inserted word and space
+    const newCursorPos = startIndex + 1 + prefix.length + newWord.length + 1;
+    textarea.selectionStart = textarea.selectionEnd = newCursorPos;
     textarea.focus();
-    textarea.selectionStart = textarea.selectionEnd =
-        startIndex + 1 + prefix.length + newWord.length;
 };
