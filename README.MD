@@ -42,7 +42,7 @@ export const suggestions = [
 ```js
 // index.js
 
-import { initializeFuzzyArea } from './fuzzy-area.js';
+import { initializeFuzzyArea } from 'fuzzy-area';
 
 // Initialize with default ID (#fuzzyarea)
 initializeFuzzyArea();
@@ -60,7 +60,7 @@ initializeFuzzyArea({ containerId: 'myCustomContainerId', maxSuggestions: 20 });
 | `containerId`    | string   | 'fuzzyarea__container'  | ID of the container in which textarea exists, which is to be made autocomplete.       |
 | `textareaId`     | string   | null         | ID of the textarea, which is to be made autocomplete. If not provided then uses textarea in container. |
 | `waitForElement` | boolean  | false        | Should it wait for the element to exist in the DOM, useful for dynamically added textareas. |
-| `maxSuggestions` | number  | Default 10        | Change number of maximum suggestions. |
+| `maxSuggestions` | number   | Default 10   | Change number of maximum suggestions. |
 
 ## Preview
 
