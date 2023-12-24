@@ -14,6 +14,8 @@ Update prefixes.js
 export const prefixes = [" ", "sm:", "md:"];
 ```
 
+You can trigger prefix autocomplete with "@"
+
 ## Change autocomplete aka suggestions
 
 ```js
@@ -75,6 +77,10 @@ initializeFuzzyArea({ containerId: 'myCustomContainerId', maxSuggestions: 20 });
 This is modified solution from [phuoc.ng](https://phuoc.ng/collection/mirror-a-text-area/add-autocomplete-to-your-text-area/)
 
 ## Changelog
+
+1.0.16
+- Added autocomplete for prefix on "@"
+- Removed autocomplete on right arrrow →
 
 1.0.15
 - Fixed keeping prefix after update suggestion
