@@ -3,19 +3,19 @@ import "./style.scss"; // Import your SCSS file here
 import { prefixes } from "./prefixes";
 import { suggestions } from "./suggestions";
 import {
-  parseValue,
-  clamp,
-  findIndexOfCurrentWord,
-  replaceCurrentWord,
+    parseValue,
+    clamp,
+    findIndexOfCurrentWord,
+    replaceCurrentWord,
 } from "./utilities.js";
 import { stylesContent } from "./styles.js";
 
 export function initializeFuzzyArea({
-    containerId = "fuzzyarea__container",
+    containerId = "fuzzyarea",
     textareaId = null,
     waitForElement = false,
     maxSuggestions = 10,
-}) {
+} = {}) {
     const fuzzyareaHandler = (containerEle, textarea) => {
         const _prefixes = window?.prefixes?.length ? window.prefixes : prefixes;
         const _suggestions = window?.suggestions?.length
@@ -291,8 +291,8 @@ export function initializeFuzzyArea({
     };
 
     const __init = () => {
-        // Use the provided ID from the config, or default to "fuzzyarea__container" if not provided
-        const _containerSelector = `#${containerId || "fuzzyarea__container"}`;
+        // Use the provided ID from the config, or default to "fuzzyarea" if not provided
+        const _containerSelector = `#${containerId || "fuzzyarea"}`;
 
         // Use the provided ID from the config, or default to textarea in container if not provided
         const _textareaSelector = textareaId ? `#${textareaId}` : "textarea";

@@ -34,7 +34,7 @@ export const suggestions = [
 ## Basic markup
 
 ```html
-<div class="container" id="container">
+<div class="container" id="fuzzyareaWrap">
     <textarea id="fuzzyarea" class="container__textarea"></textarea>
 </div>
 ```

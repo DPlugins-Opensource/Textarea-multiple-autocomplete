@@ -1,3 +1,7 @@
+#fuzzyareaWrap{
+    position: relative;
+}
+
 .fuzzyarea__mirror {
     display: none !important;
 }
@@ -13,7 +17,7 @@
     border-radius: 3px;
     color: #393939;
     position: absolute;
-    top: calc(100% - 60px);
+    top: 100%;
     left: 0;
     width: 100%;
     z-index: 1;
