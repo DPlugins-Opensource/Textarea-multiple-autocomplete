@@ -41,7 +41,7 @@ export const replaceCurrentWord = (textarea, newWord, prefixes = []) => {
     let newValue;
     if (prefixes.includes(newWord)) {
         newValue =
-            currentValue.substring(0, startIndex) +
+            currentValue.substring(0, startIndex + 1) +
             newWord +
             currentValue.substring(endIndex);
     } else {
