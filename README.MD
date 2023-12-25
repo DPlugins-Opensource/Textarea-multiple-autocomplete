@@ -59,7 +59,7 @@ initializeFuzzyArea({ containerId: 'myCustomContainerId', maxSuggestions: 20 });
 ## Props
 | Property         | Type     | Default      | Description                                                                                      |
 |------------------|----------|--------------|--------------------------------------------------------------------------------------------------|
-| containerId    | string   | 'fuzzyarea__container'  | ID of the container in which textarea exists, which is to be made autocomplete.       |
+| containerId    | string   | 'fuzzyarea'  | ID of the container in which textarea exists, which is to be made autocomplete.       |
 | textareaId     | string   | null         | ID of the textarea, which is to be made autocomplete. If not provided then uses textarea in container. |
 | waitForElement | boolean  | false        | Should it wait for the element to exist in the DOM, useful for dynamically added textareas. |
 | maxSuggestions | number   | Default 10   | Change number of maximum suggestions. |
