@@ -135,6 +135,7 @@ export function initializeFuzzyArea({
         });
 
         let currentSuggestionIndex = -1;
+        
         textarea.addEventListener("keydown", (e) => {
             if (
                 !["ArrowDown", "ArrowUp", "Enter", "Escape", "Tab"].includes(
