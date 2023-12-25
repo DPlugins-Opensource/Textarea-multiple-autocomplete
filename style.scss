@@ -1,5 +1,9 @@
 #fuzzyareaWrap{
     position: relative;
+
+    textarea{
+        font-family: inherit;
+    }
 }
 
 .fuzzyarea__mirror {
@@ -27,6 +31,7 @@
 
     .fuzzyarea__suggestion {
         padding: 0.3rem;
+        font-family: inherit;
 
         &:hover {
             background-color: rgba(58, 90, 233, 0.1);
