@@ -14,8 +14,6 @@ Update prefixes.js
 export const prefixes = [" ", "sm:", "md:"];
 ```
 
-You can trigger prefix autocomplete with "@"
-
 ## Change autocomplete aka suggestions
 
 ```js
@@ -49,12 +47,16 @@ import { initializeFuzzyArea } from 'fuzzy-area';
 // Initialize with default ID (#fuzzyarea)
 initializeFuzzyArea();
 
-// OR, to initialize with a custom ID
-initializeFuzzyArea({ containerId: 'myCustomContainerId' });
+// Initialize options
+initializeFuzzyArea({ 
+    containerId: 'myCustomContainerId', // Custom container id
+    maxSuggestions: 20,                 // Number of maximum suggestions
+    resize: true,                       // Resize height of text area as text grow
+    prefixMention: ["@", "#", ":"],     // Trigger prefix suggestions
+});
 
-// OR, Change number of suggestions from default 10 to 20
-initializeFuzzyArea({ containerId: 'myCustomContainerId', maxSuggestions: 20 });
 ```
+
 
 ## Props
 | Property         | Type     | Default      | Description                                                                                      |
@@ -62,8 +64,9 @@ initializeFuzzyArea({ containerId: 'myCustomContainerId', maxSuggestions: 20 });
 | containerId    | string   | 'fuzzyarea'  | ID of the container in which textarea exists, which is to be made autocomplete.       |
 | textareaId     | string   | null         | ID of the textarea, which is to be made autocomplete. If not provided then uses textarea in container. |
 | waitForElement | boolean  | false        | Should it wait for the element to exist in the DOM, useful for dynamically added textareas. |
-| maxSuggestions | number   | Default 10   | Change number of maximum suggestions. |
+| maxSuggestions | number   | Default is 10   | Change number of maximum suggestions. |
 | resize | boolean   | Default false   | Resize heght of text area as you type |
+| prefixMention | array   | Default is @   | add away of cherasters to use to get suggestions for prefixes |
 
 ## Preview
 
@@ -80,6 +83,9 @@ initializeFuzzyArea({ containerId: 'myCustomContainerId', maxSuggestions: 20 });
 This is modified solution from [phuoc.ng](https://phuoc.ng/collection/mirror-a-text-area/add-autocomplete-to-your-text-area/)
 
 **Changelog**
+1.2.0
+- change prefix autocomplete trigger
+
 1.1.1
 - Fixed readme file
 

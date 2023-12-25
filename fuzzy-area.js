@@ -17,6 +17,7 @@ export function initializeFuzzyArea({
     waitForElement = false,
     maxSuggestions = 10,
     resize = false,
+    prefixMention = ["@"], // Set default as an array
 } = {}) {
     const fuzzyareaHandler = (containerEle, textarea) => {
         const _prefixes = window?.prefixes?.length ? window.prefixes : prefixes;
@@ -105,7 +106,8 @@ export function initializeFuzzyArea({
             _suggestions,
             maxSuggestions,
             replaceCurrentWord,
-            findIndexOfCurrentWord
+            findIndexOfCurrentWord,
+            prefixMention
         );
 
         // Do we need this one ===> // let currentSuggestionIndex = -1;

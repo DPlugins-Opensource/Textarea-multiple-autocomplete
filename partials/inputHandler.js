@@ -8,7 +8,8 @@ export function attachInputHandler(
     _suggestions,
     maxSuggestions,
     replaceCurrentWord,
-    findIndexOfCurrentWord
+    findIndexOfCurrentWord,
+    prefixMention
 ) {
     textarea.addEventListener("input", () => {
         const currentValue = textarea.value;
@@ -22,10 +23,15 @@ export function attachInputHandler(
         }
 
         let matches = [];
-        if (currentWord.startsWith("@")) {
+        
+        const isPrefixMention = prefixMention.some((prefix) =>
+            currentWord.startsWith(prefix)
+        );
+
+        if (isPrefixMention) {
             matches = _prefixes.map((prefix) => prefix);
         } else {
-            const _parts = currentWord.split(':');
+            const _parts = currentWord.split(":");
             const _currentWord = _parts?.length > 1 ? _parts[1] : _parts[0];
             matches = _suggestions.filter((suggestion) =>
                 suggestion.toLowerCase().includes(_currentWord.toLowerCase())
