@@ -3,7 +3,7 @@
 ## Updated to get extra features:
 
 1. Autocomplete prefix
-2. To trigger autocomplete apply with Enter, Tab, Right Arrow "→"
+2. To trigger autocomplete apply with Enter or Tab
 3. Fuzzy search
 
 ## Change triggers
