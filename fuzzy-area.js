@@ -1,15 +1,15 @@
 // main.js
 import "./style.scss"; // Import your SCSS file here
+import { stylesContent } from "./partials/styles.js";
 
 import { prefixes } from "./prefixes";
-import { suggestions } from "./suggestions";
-import {
-    parseValue,
-    clamp,
-    findIndexOfCurrentWord,
-    replaceCurrentWord,
-} from "./utilities.js";
-import { stylesContent } from "./styles.js";
+import { suggestions } from "./partials/suggestions.js";
+import { parseValue, clamp, findIndexOfCurrentWord, replaceCurrentWord,} from "./partials/utilities.js";
+
+// eventListenes
+import { attachScrollHandler } from "./partials/scrollHandler.js";
+// import { attachInputHandler } from "./partials/inputHandler.js";
+import { attachKeydownHandler } from "./partials/keydownHandler.js";
 
 export function initializeFuzzyArea({
     containerId = "fuzzyarea",
@@ -73,9 +73,7 @@ export function initializeFuzzyArea({
         });
         ro.observe(textarea);
 
-        textarea.addEventListener("scroll", () => {
-            mirroredEle.scrollTop = textarea.scrollTop;
-        });
+        attachScrollHandler(textarea, mirroredEle);
 
         textarea.addEventListener("input", () => {
             const currentValue = textarea.value;
@@ -136,77 +134,13 @@ export function initializeFuzzyArea({
 
         let currentSuggestionIndex = -1;
         
-        textarea.addEventListener("keydown", (e) => {
-            if (
-                !["ArrowDown", "ArrowUp", "Enter", "Escape", "Tab"].includes(
-                    e.key
-                )
-            ) {
-                return;
-            }
-
-            const suggestionsElements = suggestionsEle.querySelectorAll(
-                ".fuzzyarea__suggestion"
-            );
-            const numSuggestions = suggestionsElements.length;
-            if (
-                numSuggestions === 0 ||
-                suggestionsEle.style.display === "none"
-            ) {
-                return;
-            }
-            e.preventDefault();
-
-            switch (e.key) {
-                case "ArrowDown":
-                    suggestionsElements[
-                        clamp(0, currentSuggestionIndex, numSuggestions - 1)
-                    ].classList.remove("fuzzyarea__suggestion--focused");
-                    currentSuggestionIndex = clamp(
-                        0,
-                        currentSuggestionIndex + 1,
-                        numSuggestions - 1
-                    );
-                    suggestionsElements[currentSuggestionIndex].classList.add(
-                        "fuzzyarea__suggestion--focused"
-                    );
-                    break;
-                case "ArrowUp":
-                    suggestionsElements[
-                        clamp(0, currentSuggestionIndex, numSuggestions - 1)
-                    ].classList.remove("fuzzyarea__suggestion--focused");
-                    currentSuggestionIndex = clamp(
-                        0,
-                        currentSuggestionIndex - 1,
-                        numSuggestions - 1
-                    );
-                    suggestionsElements[currentSuggestionIndex].classList.add(
-                        "fuzzyarea__suggestion--focused"
-                    );
-                    break;
-                case "Enter":
-                case "Tab":
-                    if (
-                        currentSuggestionIndex >= 0 &&
-                        currentSuggestionIndex < numSuggestions
-                    ) {
-                        replaceCurrentWord(
-                            textarea,
-                            suggestionsElements[currentSuggestionIndex]
-                                .innerText,
-                            _prefixes
-                        );
-                        suggestionsEle.style.display = "none";
-                        if (e.key !== "Enter") {
-                            textarea.focus();
-                        }
-                    }
-                    break;
-                case "Escape":
-                    suggestionsEle.style.display = "none";
-                    break;
-            }
-        });
+        attachKeydownHandler(
+            textarea,
+            suggestionsEle,
+            _prefixes,
+            replaceCurrentWord,
+            clamp
+        );
     };
 
     const __getBySelector = (selector) => {
