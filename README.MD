@@ -63,6 +63,7 @@ initializeFuzzyArea({ containerId: 'myCustomContainerId', maxSuggestions: 20 });
 | `textareaId`     | string   | null         | ID of the textarea, which is to be made autocomplete. If not provided then uses textarea in container. |
 | `waitForElement` | boolean  | false        | Should it wait for the element to exist in the DOM, useful for dynamically added textareas. |
 | `maxSuggestions` | number   | Default 10   | Change number of maximum suggestions. |
+| `resize` | boolean   | Default false   | Resize heght of text area as you type |
 
 ## Preview
 
@@ -76,7 +77,7 @@ initializeFuzzyArea({ containerId: 'myCustomContainerId', maxSuggestions: 20 });
 ### Credits:
 This is modified solution from [phuoc.ng](https://phuoc.ng/collection/mirror-a-text-area/add-autocomplete-to-your-text-area/)
 
-## Changelog
+**Changelog**
 
 1.0.16
 - Added autocomplete for prefix on "@"

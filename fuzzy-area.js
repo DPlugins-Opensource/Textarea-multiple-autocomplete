@@ -16,6 +16,7 @@ export function initializeFuzzyArea({
     textareaId = null,
     waitForElement = false,
     maxSuggestions = 10,
+    resize = false,
 } = {}) {
     const fuzzyareaHandler = (containerEle, textarea) => {
         const _prefixes = window?.prefixes?.length ? window.prefixes : prefixes;
@@ -61,17 +62,38 @@ export function initializeFuzzyArea({
         mirroredEle.style.borderColor = "transparent";
         mirroredEle.style.display = "none";
 
-        const borderWidth = parseValue(textareaStyles.borderWidth);
+        if (resize) {
+            const borderWidth = parseValue(textareaStyles.borderWidth);
 
-        const ro = new ResizeObserver(() => {
-            mirroredEle.style.width = `${
-                textarea.clientWidth + 2 * borderWidth
-            }px`;
-            mirroredEle.style.height = `${
-                textarea.clientHeight + 2 * borderWidth
-            }px`;
-        });
-        ro.observe(textarea);
+            const ro = new ResizeObserver(() => {
+                mirroredEle.style.width = `${
+                    textarea.clientWidth + 2 * borderWidth
+                }px`;
+                mirroredEle.style.height = `${
+                    textarea.clientHeight + 2 * borderWidth
+                }px`;
+            });
+            ro.observe(textarea);
+
+            // Function to adjust the height of textarea
+            function adjustHeight(textArea) {
+                // Set the height to 'auto' to get the correct scroll height
+                textArea.style.height = "auto";
+                // Set the height to the scroll height
+                textArea.style.height = textArea.scrollHeight + "px";
+            }
+
+            // Get the textarea element by its ID or class
+            const textArea = document.getElementById(containerId);
+
+            // Add an event listener for input event
+            textArea.addEventListener("input", function () {
+                adjustHeight(this);
+            });
+
+            // Initial adjustment in case there's already text in the textarea
+            adjustHeight(textArea);
+        }
 
         attachScrollHandler(textarea, mirroredEle);
 
