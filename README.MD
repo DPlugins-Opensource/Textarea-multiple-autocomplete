@@ -79,6 +79,9 @@ This is modified solution from [phuoc.ng](https://phuoc.ng/collection/mirror-a-t
 
 **Changelog**
 
+1.0.17
+- Added height resize
+
 1.0.16
 - Added autocomplete for prefix on "@"
 - Removed autocomplete on right arrrow →
