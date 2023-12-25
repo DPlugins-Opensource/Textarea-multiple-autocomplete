@@ -1,6 +1,6 @@
 // main.js
 import "./style.scss"; // Import your SCSS file here
-import { stylesContent } from "./partials/styles.js";
+// import { stylesContent } from "./partials/styles.js";
 
 import { prefixes } from "./prefixes";
 import { suggestions } from "./partials/suggestions.js";
@@ -24,9 +24,9 @@ export function initializeFuzzyArea({
             ? window.suggestions
             : suggestions;
 
-        const styleElement = document.createElement("style");
-        styleElement.textContent = stylesContent;
-        document.head.appendChild(styleElement);
+        // const styleElement = document.createElement("style");
+        // styleElement.textContent = stylesContent;
+        // document.head.appendChild(styleElement);
 
         containerEle.style.position = "relative";
 
