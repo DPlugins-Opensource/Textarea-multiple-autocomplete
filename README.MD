@@ -80,6 +80,8 @@ initializeFuzzyArea({ containerId: 'myCustomContainerId', maxSuggestions: 20 });
 This is modified solution from [phuoc.ng](https://phuoc.ng/collection/mirror-a-text-area/add-autocomplete-to-your-text-area/)
 
 **Changelog**
+1.1.1
+- Fixed readme file
 
 1.1.0
 - Fixed removing extra space when adding prefix
