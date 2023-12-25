@@ -25,8 +25,10 @@ export function attachInputHandler(
         if (currentWord.startsWith("@")) {
             matches = _prefixes.map((prefix) => prefix);
         } else {
+            const _parts = currentWord.split(':');
+            const _currentWord = _parts?.length > 1 ? _parts[1] : _parts[0];
             matches = _suggestions.filter((suggestion) =>
-                suggestion.toLowerCase().includes(currentWord.toLowerCase())
+                suggestion.toLowerCase().includes(_currentWord.toLowerCase())
             );
         }
 
