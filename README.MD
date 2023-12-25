@@ -67,17 +67,23 @@ initializeFuzzyArea({ containerId: 'myCustomContainerId', maxSuggestions: 20 });
 
 ## Preview
 
-### Regular on type
+### Suggestions
 <img width="416" alt="preview" src="https://github.com/dplugins-opensource/fuzzy-area/assets/1234350/b5c2ed0a-bf77-42da-bd34-64a467919643">
 
-### Regular on prefix
+### Suggestions after prefix
 <img width="487" alt="preview-prefix" src="https://github.com/dplugins-opensource/fuzzy-area/assets/1234350/667c7801-5902-4e79-b971-e229d6e7d5a5">
 
+### Prefix autocomplete
+<img width="1047" alt="preview-prefix-autocomplete" src="https://github.com/dplugins-opensource/fuzzy-area/assets/1234350/816f3b8e-8fbf-46ef-8070-6941fce7b761">
 
 ### Credits:
 This is modified solution from [phuoc.ng](https://phuoc.ng/collection/mirror-a-text-area/add-autocomplete-to-your-text-area/)
 
 **Changelog**
+
+1.1.0
+- Fixed removing extra space when adding prefix
+- Allow suggestion after prefix without extra space in between
 
 1.0.17
 - Added height resize
