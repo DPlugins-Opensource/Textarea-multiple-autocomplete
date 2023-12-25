@@ -86,8 +86,9 @@ export function initializeFuzzyArea({
             findIndexOfCurrentWord
         );
 
-        // Do ne need this one ===> // let currentSuggestionIndex = -1;
+        // Do we need this one ===> // let currentSuggestionIndex = -1;
 
+        // Keyboard shortcuts
         attachKeydownHandler(
             textarea,
             suggestionsEle,
