@@ -34,8 +34,8 @@ export const suggestions = [
 ## Basic markup
 
 ```html
-<div class="container" id="fuzzyareaWrap">
-    <textarea id="fuzzyarea" class="container__textarea"></textarea>
+<div class="container" id="fuzzyarea">
+    <textarea class="container__textarea"></textarea>
 </div>
 ```
 
@@ -83,6 +83,10 @@ initializeFuzzyArea({
 This is modified solution from [phuoc.ng](https://phuoc.ng/collection/mirror-a-text-area/add-autocomplete-to-your-text-area/)
 
 **Changelog**
+
+1.2.2
+- Updated readme and example
+
 1.2.0
 - change prefix autocomplete trigger
 
