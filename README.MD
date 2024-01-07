@@ -84,6 +84,9 @@ This is modified solution from [phuoc.ng](https://phuoc.ng/collection/mirror-a-t
 
 **Changelog**
 
+1.2.3
+- Package JSON fix
+
 1.2.2
 - Updated readme and example
 
